@@ -532,7 +532,7 @@ a.list-group-item_gg:focus {
 
 /*大标题图片新闻列表*/
 .bignewsbox{ display:block; margin-bottom:15px;}
-.bignewsbox .Nhead{ line-height:2; font-size:21px; font-weight:600; color:#26496d; height:45px}
+.bignewsbox .Nhead{ line-height:2; font-size:21px; font-weight:normal; color:#26496d; height:45px; overflow:hidden;}
 .bignewsbox .Nbd{}
 .bignewsbox .Nbd img{ float:left; margin-right:16px; width:120px; height:78px;}
 .bignewsbox .Nbd p{ line-height:2; font-size:14px; color:#555; /*height:84px*/}
@@ -615,7 +615,7 @@ a.list-group-item_gr:focus {
   z-index: 2;
   color: #26496d;
   border-color: #26496d;
-  font-weight:600;
+  font-weight:normal;
 }
 
 .rightad_boxg{margin-bottom:15px;}
@@ -623,7 +623,7 @@ a.list-group-item_gr:focus {
 
 .content_title{line-height:2; font-size:24px; color:#26496d; font-weight:600; padding:0px 0px 8px 0px;}
 .content_p{
-	line-height:2; font-size:16px; color:#26496d}
+	text-indent:2em;line-height:2; font-size:16px; color:#333333}
 	
 	
 .content_p img{
