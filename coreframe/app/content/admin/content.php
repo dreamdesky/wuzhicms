@@ -184,6 +184,18 @@ class content extends WUZHI_admin {
                 $formdata['master_data']['remark'] = mb_strcut(strip_tags($formdata['attr_data']['content']),0,255);
             }
 
+            //检查 original_url 格式是否正确，及是否存在重复
+            if (isset($formdata['attr_data']['original_url']) && !empty($formdata['attr_data']['original_url'])) {
+            	//检查格式
+            	if (!preg_match('/[a-z]+:\/\/[a-z0-9_\-\/.%]+/i', $formdata['attr_data']['original_url'])) MSG('网址格式不正确！', HTTP_REFERER);
+            	
+            	//根据网址查询内容
+            	$result_original_url = $this->db->get_one($formdata['attr_table'], array('original_url' => $formdata['attr_data']['original_url']));
+            	 
+            	if ($result_original_url['id'] > 0)
+            		MSG('文章已存在，<a href="?m=content&f=content&v=edit&id='.$result_original_url['id'].'&type=&cid=6&_su=wuzhicms&_menuid=">点击查看</a>!');
+            }
+
             $id = $this->db->insert($formdata['master_table'],$formdata['master_data']);
             if($cate_config['type']) {
                 $urls['url'] = $cate_config['url'];
@@ -607,7 +619,7 @@ class content extends WUZHI_admin {
     public function delete_more() {
     	//获取提交的数据
     	$cid = intval($GLOBALS['cid']);
-    	
+
     	//数据校验
         if(empty($GLOBALS['ids'])) MSG('没有选择任何文章');
         if(!$cid) MSG(L('parameter_error'));
