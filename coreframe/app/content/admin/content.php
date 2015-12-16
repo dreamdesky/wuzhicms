@@ -282,11 +282,16 @@ class content extends WUZHI_admin {
             set_cache('lastlist',$lastlist,'content');
             //编辑操作日志
             $this->editor_logs('add',$formdata['master_data']['title'],$urls['url'], "?m=content&f=content&v=edit&id=$id&cid=$cid");
+            
+            //百度站长 
+            load_function('curl');
+			$result_baidu = post_curl('http://data.zz.baidu.com/urls?site=news.ddcampus.com&token=9wqPcXNSfUMwZmm1&type=original', 'http://news.ddcampus.com'.$urls['url'],$headers = 'Content-Type: text/plain');
+
             //设置返回地址
             if(isset($GLOBALS['submit'])) {
-                MSG(L('add success'),'?m=content&f=content&v=listing&type='.$GLOBALS['type'].'&cid='.$cid.$this->su(),1000);
+                MSG(L('add success').$result_baidu,'?m=content&f=content&v=listing&type='.$GLOBALS['type'].'&cid='.$cid.$this->su(),1000);
             } else {
-                MSG(L('add success'),URL(),1000);
+                MSG(L('add success').$result_baidu,URL(),1000);
             }
         } else {
             load_function('template');
